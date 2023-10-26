@@ -45,10 +45,8 @@ app.get('/peliculas', (req, res) => {
     let filterValue = req.query.filterValue; // Convertir a cadena
 
     if (filterKey && filterValue) {
-        // Convertir filterValue a cadena si es un número
-        if (!isNaN(filterValue)&& filterKey=='año') {
-            filterValue = parseInt(filterValue);
-        }
+        
+        
 
         // Filtrar registros por el valor del query param
         const filteredData = data.filter(pelicula => pelicula[filterKey] === filterValue);
