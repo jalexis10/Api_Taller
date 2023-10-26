@@ -1,0 +1,90 @@
+<%- include('../layouts/header', {title: 'lista de peliculas'}); -%>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center" >
+                <h1 >Lista de peliculas</h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" >
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">DIRECTOR</th>
+                            <th scope="col">AÑO</th>
+                            <th scope="col">GENERO</th>
+                            <th scope="col">DURACION</th>
+                            <th scope="col">CALIFICACION</th>
+                            <th scope="col">ELIMINAR</th>
+                            <th scope="col">DESCARGAR</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% peliculas.map(pelicula => { %>
+                                
+                            
+                          <tr>
+                            <th scope="row"><%= pelicula.id %></th>
+                            <td><%= pelicula.nombre %></td>
+                            <td><%= pelicula.director %></td>
+                            <td><%= pelicula.año %></td>
+                            <td><%= pelicula.genero %></td>
+                            <td><%= pelicula.duracion %></td>
+                            <td><%= pelicula.calificacion %></td>
+                            <td>
+                                <form action="/peliculas/delete/<%= pelicula.id %>" method="post">
+                                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                                </form>
+                            </td>
+                            <td>
+                              <form action="/peliculas/generarPDF/<%= pelicula.id %>" method="get">
+                                <button type="submit" class="btn btn-outline-danger">Descargar PDF</button>
+                              </form>
+                          </td>
+                            
+                          </tr>
+                          <% }) %>
+                         
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+            <div class="row">
+              <form action="/peliculas" method="get" class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="filterKey" class="form-label">Filtrar por</label>
+                            <select class="form-select" id="filterKey" name="filterKey">
+                                <option value="null">Filtrar por</option>
+                                <option value="nombre">Nombre</option>
+                                <option value="año">Año</option>
+                                <option value="director">Director</option>
+                                <option value="genero">Género</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="filterValue" class="form-label">Valor de filtro</label>
+                            <input type="text" class="form-control" id="filterValue" name="filterValue" placeholder="Valor de filtro">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+                </div>
+            <div class="row">
+              <div class="col-12 d-grid">
+                  <a href="/peliculas/create" class="btn btn-outline-secondary">
+                      Crear nueva pelicula
+                  </a>
+              </div>
+          </div>
+      </div>
+        <%- include('../layouts/footer');  -%>
+    

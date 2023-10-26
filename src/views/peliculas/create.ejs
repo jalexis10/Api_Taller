@@ -1,0 +1,51 @@
+<%- include('../layouts/header', {title: 'Create a new pet'}); -%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="alert alert-success text-center">CREAR PELICULA</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <form action="/peliculas" method="post" class="row">
+                    <div class="col-6">
+                        <label for="nombre" class="form-label">NOMBRE</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="director" class="form-label">DIRECTOR</label>
+                        <input type="text" name="director" id="director" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="año" class="form-label">AÑO</label>
+                        <input type="number" name="año" id="año" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="genero" class="form-label">GENERO</label>
+                        <input type="text" name="genero" id="genero" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="duracion" class="form-label">DURACION</label>
+                        <input type="text" name="duracion" id="duracion" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="calificacion" class="form-label">CALIFICACION</label>
+                        <input type="number" name="calificacion" id="calificacion" class="form-control" required>
+                    </div>
+                    <div class="col-12 d-grid mt-4">
+                        <button type="submit" class="btn btn-outline-success">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-grid mt-4">
+                <a href="/peliculas" class="btn btn-outline-secondary">
+                    volver a peliculas
+                </a>
+            </div>
+        </div>
+    </div>
+
+<%- include('../layouts/footer'); -%>
