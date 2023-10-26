@@ -46,12 +46,10 @@ app.get('/peliculas', (req, res) => {
 
     if (filterKey && filterValue) {
         // Convertir filterValue a cadena si es un número
-        if (!isNaN(filterValue)&& filterKey=='año') {
-            filterValue = parseInt(filterValue);
-        }
+        
 
         // Filtrar registros por el valor del query param
-        const filteredData = data.filter(pelicula => pelicula[filterKey].toLowerCase() === filterValue);
+        const filteredData = data.filter(pelicula => pelicula[filterKey] === filterValue);
         res.render('peliculas/index', {peliculas: filteredData});
         console.log(filterKey, filterValue, filteredData);
     } else {
@@ -119,6 +117,38 @@ app.get('/peliculas/generarPDF/:id', (req, res) => {
            .end();
 
            res.redirect('/peliculas');
+    } else {
+        res.status(404).send('Registro no encontrado');
+    }
+});
+
+// Web ACTUALIZAR (Vista)
+app.get('/peliculas/update/:id', (req, res) => {
+    const id = req.params.id;
+    const data = getDataById(id);
+    console.log(data, id, 'no hay');
+
+    if (data) {
+        res.render('peliculas/update', { pelicula: data });
+        console.log(data);
+    } else {
+        res.status(404).send('Registro no encontrado');
+    }
+});
+
+// Procesar la actualización
+app.post('/peliculas/update/:id', (req, res) => {
+    const id = req.params.id;
+    const newData = req.body;
+
+    const data = readFile(File_Name);
+    const dataIndex = data.findIndex(pelicula => pelicula.id === id);
+
+    if (dataIndex >= 0) {
+        const updatedData = { ...data[dataIndex], ...newData };
+        data[dataIndex] = updatedData;
+        writeFile(File_Name, data);
+        res.redirect('/peliculas');
     } else {
         res.status(404).send('Registro no encontrado');
     }

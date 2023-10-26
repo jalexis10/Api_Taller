@@ -44,6 +44,12 @@
                                 <button type="submit" class="btn btn-outline-danger">Descargar PDF</button>
                               </form>
                           </td>
+                          <td>                             
+                                    <a href="/peliculas/update/<%= pelicula.id %>" class="btn btn-outline-secondary">
+                                        Actualizar Película
+                                    </a>
+                             
+                          </td>
                             
                           </tr>
                           <% }) %>
@@ -85,6 +91,7 @@
                   </a>
               </div>
           </div>
+        
       </div>
         <%- include('../layouts/footer');  -%>
     

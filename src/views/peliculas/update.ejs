@@ -1,0 +1,25 @@
+<%- include('../layouts/header', {title: 'Actualizar Película'}); -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Actualizar Película</h1>
+        </div>
+        <div class="col-12">
+            <form action="/peliculas/update/<%= pelicula.id %>" method="post">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="<%= pelicula.nombre %>">
+                </div>
+                <div class="mb-3">
+                    <label for="director" class="form-label">Director</label>
+                    <input type="text" class="form-control" id="director" name="director" value="<%= pelicula.director %>">
+                </div>
+                <!-- Agrega más campos según tus necesidades -->
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../layouts/footer'); -%>
