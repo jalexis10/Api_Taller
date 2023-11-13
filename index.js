@@ -38,8 +38,62 @@ app.use((req, res, next) => {
 
 
 
+<<<<<<< HEAD
     
   
+=======
+    // Obtener el query param para filtrar
+    const filterKey = req.query.filterKey;
+    let filterValue = req.query.filterValue; // Convertir a cadena
+
+    if (filterKey && filterValue) {
+        
+        
+
+        // Filtrar registros por el valor del query param
+        const filteredData = data.filter(pelicula => pelicula[filterKey] === filterValue);
+        res.render('peliculas/index', {peliculas: filteredData});
+        console.log(filterKey, filterValue, filteredData);
+    } else {
+        // Si no hay query param, renderizar todos los registros
+        res.render('peliculas/index', {peliculas: data});
+    }
+});
+//web crear
+app.get('/peliculas/create', (req, res) => {
+    res.render('peliculas/create');
+});
+
+app.post('/peliculas', (req, res) => {
+    try{
+        const data = readFile(File_Name);
+        const newPelicula = req.body;
+        newPelicula.id = uuidv4();
+        console.log(newPelicula);
+        data.push(newPelicula);
+        writeFile(File_Name, data);
+        res.redirect('/peliculas');
+    } catch (err) {
+        console.error(err);
+        res.json({error: 'Error al crear la pelicula'});
+    }
+});
+//web eliminar
+app.post('/peliculas/delete/:id', (req, res) => {
+    console.log(req.params.id);
+
+    const id = req.params.id;
+    const peliculas = readFile(File_Name);
+    const peliculaIndex = peliculas.findIndex(pelicula => pelicula.id == id);
+    if (peliculaIndex < 0) {
+        res.status(404).json({error: 'Pelicula no encontrada'});
+        return;
+    }   
+    peliculas.splice(peliculaIndex, 1);
+    writeFile(File_Name, peliculas);
+    res.redirect('/peliculas');
+});
+>>>>>>> 8501f198865ba4ab610e09e319a1fcd94a4be1fc
 
 //DESCARGAR PDF
 function getDataById(id) {
